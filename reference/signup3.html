@@ -61,8 +61,7 @@
           <button class="btn btn-lg btn-primary btn-block" type="submit" value="로그인">로그인</button>
           <button class="mt-5 mb-3 text-muted">&copy;<a href="/signup">회원가입</a></button>
         </form> -->
-      <form class="needs-validation" action="/signup" method="POST"> 
-        <!-- rotuer.signup을 통해 일처리 -->
+      <form class="needs-validation" action="/" method="post">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Name</label>
@@ -98,11 +97,9 @@
         
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <button class="badge badge-secondary badge-pill" onclick="alert('회원가입이 정상적으로 완료되었습니다.')">Submit</button>
-            <!-- button이 input submit의 역할을 대신해줌 -->
+            <span class="badge badge-secondary badge-pill" type="submit" onclick="alert('회원가입이 정상적으로 완료되었습니다.')">Submit</span>
           </h4>
         </div>
-
       </form>
     </div>
   </div>

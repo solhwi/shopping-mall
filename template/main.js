@@ -10,7 +10,6 @@ import TableCell from '@material-ui/core/TableCell';
 import {withStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -36,7 +35,6 @@ menu: {
 
 },
 tableHead: {
-
   fontSize: '1.0rem'
 },
 
@@ -195,11 +193,12 @@ class Main extends Component{
                 })}
               </TableRow>
             </TableHead>
+            
             <TableBody>
             {this.state.products && typeof this.state.products === 'object' 
             ? this.state.products.map( c => {
                 return( 
-                <Customer
+                <Product
                   stateRefresh= {this.stateRefresh}
                   key={c.id}
                   id={c.id}

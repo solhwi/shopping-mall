@@ -18,7 +18,7 @@ const styles = theme => ({
 
 
 
-class CustomerAdd extends Component {
+class ProductAdd extends Component {
 
 
     constructor(props) {
@@ -27,10 +27,9 @@ class CustomerAdd extends Component {
         this.state = {
             file: null, //프사
             fileName:'',
-            userName: '',
-            birth: '',
-            sex: '',
-            job:'',
+            productName: '',
+            price: '',
+            context: '',
             open: false // dialog가 열려있는 지의 여부
         }
     }
@@ -46,51 +45,44 @@ class CustomerAdd extends Component {
         this.setState({
             file: null, //프사
             fileName:'',
-            userName: '',
-            birth: '',
-            sex: '',
-            job:'',
+            productName: '',
+            price: '',
+            context: '',
             open: false // dialog가 열려있는 지의 여부
         })
 
     } 
 
-    addCustomer = () => {
-        const url = '/api/customers';
+    addProduct = () => {
+        const url = '/api/products';
         const formData = new FormData();
         formData.append('image', this.state.file)
-        formData.append('name', this.state.userName)
-        formData.append('birth', this.state.birth)
-        formData.append('sex', this.state.sex)
-        formData.append('job', this.state.job)
-
+        formData.append('productname', this.state.productName)
+        formData.append('price', this.state.price)
+        formData.append('context', this.state.context)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         }   //데이터에 헤더를 달며 정보
-
         return post(url, formData, config);
-
     } //데이터 전송 코드
 
 
     handleFormSubmit = (e) => {
         e.preventDefault() //오류없게 전달되도록 부르는 함수 
-        this.addCustomer()
-            .then( (response) => {
-                console.log(response.data);
+        this.addProduct()
+            .then((response) => {
                 this.props.stateRefresh();
                 //props로 전달받은 stateRefresh 사용
             })
         
             this.setState({
                 file: null, //프사
-                userName: '',
+                productName: '',
                 fileName:'',
-                birth: '',
-                sex: '',
-                job:''       
+                price: '',
+                context: '',
             })
             
     }
@@ -117,12 +109,14 @@ class CustomerAdd extends Component {
         return (
             <div>
                 <Button variant ="contained"
-                color="primary"
+                color="pink"
                 onClick={this.handleClickOpen}
-                >고객 추가하기
+                >상품 추가
                 </Button>
+
+
                 <Dialog open={this.state.open} onClose={this.handleClickClose}>
-                    <DialogTitle>고객을 추가하세요.</DialogTitle>
+                    <DialogTitle>상품을 추가하세요.</DialogTitle>
                     <DialogContent>
                         <input className={classes.hidden} 
                         accept="image/" id="raised-button-file"
@@ -131,41 +125,37 @@ class CustomerAdd extends Component {
                         onChange={this.handleFileChange}
                         ></input>
                         <label htmlFor="raised-button-file">
-                            <Button variant="contained" color="primary" component="span" name="file">
-                                {this.state.fileName === "" ? "프로필 이미지 선택" : this.state.fileName}
+                            <Button variant="contained" color="pupple" component="span" name="file">
+                                {this.state.fileName === "" ? "Choice Product's Image" : this.state.fileName}
                             </Button>
+                            
                         </label><br/><br/>
                         <TextField
-                          label="이름" type="text" name="userName" 
-                         value={this.state.userName}
+                          label="상품명" type="text" name="productName" 
+                         value={this.state.productName}
                          onChange={this.handleValueChange}
                         ></TextField><br/>
                         <TextField
-                          label="생년월일" type="text" name="birth" 
-                         value={this.state.birth}
+                          label="가격" type="text" name="price" 
+                         value={this.state.price}
                          onChange={this.handleValueChange}
                         ></TextField><br/>
                         <TextField
-                          label="성별" type="text" name="sex" 
-                         value={this.state.sex}
-                         onChange={this.handleValueChange}
-                        ></TextField><br/>
-                        <TextField
-                          label="직업" type="text" name="job" 
-                         value={this.state.job}
+                          label="상품 설명" type="text" name="context" 
+                         value={this.state.context}
                          onChange={this.handleValueChange}
                         ></TextField>
                     </DialogContent>
 
                     <DialogActions>
                         <Button 
-                            variant="contained" color="primary"
+                            variant="contained" color="pupple"
                             onClick={this.handleFormSubmit}
                         >
-                        고객 추가하기
+                        추가
                         </Button>
                         <Button 
-                            variant="outlined" color="primary"
+                            variant="outlined" color="pupple"
                             onClick={this.handleClickClose}
                         >
                         닫기
@@ -177,4 +167,4 @@ class CustomerAdd extends Component {
     }
 }
 
-export default withStyles(styles)(CustomerAdd);
+export default withStyles(styles)(ProductAdd);

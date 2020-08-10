@@ -3,11 +3,11 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField'; //?? 이새끼머임
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-class CustomerDelete extends Component {
+class ProductDelete extends Component {
 
     constructor(props) {
         super(props)
@@ -43,20 +43,20 @@ class CustomerDelete extends Component {
             <Button variant ="contained"
                 color="pink"
                 onClick={this.handleClickOpen}
-                >고객 삭제
+                >상품 삭제
             </Button>
             <Dialog open = {this.state.open}>
             <DialogTitle onClose={this.handleClose}>
-                Warning</DialogTitle>
+                ! Warning</DialogTitle>
             <DialogContent>
-                <Typography>고객에 관련된 정보가 삭제됩니다.</Typography><br/>
+                <Typography>상품 및 관련 정보가 모두 삭제됩니다.</Typography><br/>
                 <DialogActions>
                         <Button 
                             variant="contained" color="primary"
                             onClick={(e) => 
                                 {this.deleteCustomer(this.props.id)}}
                         >
-                        고객 삭제하기
+                        삭제
                         </Button>
                         <Button 
                             variant="outlined" color="primary"
@@ -73,4 +73,4 @@ class CustomerDelete extends Component {
     }
 }
 
-export default CustomerDelete;
+export default ProductDelete;

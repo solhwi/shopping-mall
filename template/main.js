@@ -1,5 +1,6 @@
 import React, {Component} from 'react'; // {component}가 있어야 extends Component 가능
-import Customer from './components/Customer';
+import Product from './components/Product';
+import ProductAdd from './components/ProductAdd';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -8,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import {withStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import CustomerAdd from './components/CustomerAdd';
+
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -101,7 +102,7 @@ progress:{
 
 })
 
-class App extends Component{
+class Main extends Component{
 
   constructor(props){
     super(props);
@@ -114,11 +115,11 @@ class App extends Component{
 
   stateRefresh = () => {
     this.setState({
-      customers: '',
+      products: '',
       completed: 0
     });
     this.callApi()
-    .then (res => this.setState({customers: res}))
+    .then (res => this.setState({products: res}))
     .catch(err => console.log(err));
 
   }
@@ -133,12 +134,12 @@ class App extends Component{
     this.timer = setInterval(this.progress,20); 
     // 0.02초마다 this.progress함수가실행됨
     this.callApi()
-      .then (res => this.setState({customers: res}))
+      .then (res => this.setState({products: res}))
       .catch(err => console.log(err));
   }
 
   callApi = async() => {
-    const response = await fetch('/api/customers');
+    const response = await fetch('/api/products');
     console.log(response)
     const body = await response.json();
     console.log(body);
@@ -147,7 +148,7 @@ class App extends Component{
 
   render(){
     const {classes} = this.props;
-    const cellList = ["번호", "프로필이미지", "이름", "생년월일", "성별", "직업", "설정"];
+    const cellList = ["상품명", "제목", "가격", "상품미리보기", "설정"];
     return (
       <div className={classes.root}>
            <AppBar position="static">
@@ -161,7 +162,7 @@ class App extends Component{
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            고객 관리 시스템
+            FuckSound Mall
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -179,10 +180,9 @@ class App extends Component{
         </Toolbar>
       </AppBar>
       <div className={classes.menu}>
-      <CustomerAdd
+      <ProductAdd
          stateRefresh={this.stateRefresh} 
-      />        
-      </div>
+      /></div>
                
         <Paper className={classes.paper}>
             <Table className={classes.table}>
@@ -196,18 +196,17 @@ class App extends Component{
               </TableRow>
             </TableHead>
             <TableBody>
-            {this.state.customers && typeof this.state.customers === 'object' 
-            ? this.state.customers.map( c => {
+            {this.state.products && typeof this.state.products === 'object' 
+            ? this.state.products.map( c => {
                 return( 
                 <Customer
                   stateRefresh= {this.stateRefresh}
                   key={c.id}
                   id={c.id}
                   image={c.image}
-                  name={c.name}
-                  birth={c.birth}
-                  sex={c.sex}
-                  job={c.job}
+                  productName={c.productName}
+                  price={c.price}
+                  context={c.context}
                 />);})
               : <TableRow>
                   <TableCell colSpan="6" align="center">
@@ -220,13 +219,10 @@ class App extends Component{
                 </TableRow>}
             </TableBody>
          </Table>
-            <p>{JSON.stringify(this.state.customers)}</p>
-        </Paper>
-        
-        
+        </Paper>        
       </div>       
     );
   } 
 }
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(Main);

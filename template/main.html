@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <title>FuckSound Factory</title>
+    <title>main page</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!-- main.js -->
+    <fieldset style="width: 500px;">
+      <legend><h3>제품 목록</h3></legend>
+      <table>
+        <tr>
+          <th>제품 이름</th>
+          <th>가격</th>
+          <th>제품설명</th>
+          <th>삭제</th>
+        </tr>
+        <tr>
+          <td>제품 이름</td>
+          <td></th>가격</td>
+          <td>제품설명</td>
+          <td>삭제</td>
+        </tr>
+      </table>
+      <form action="/main/write" method="post">
+        <input type="submit" value="작성하기" />
+      </form>
+    </fieldset>
   </body>
 </html>

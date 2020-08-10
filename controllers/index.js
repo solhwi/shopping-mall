@@ -20,6 +20,11 @@ router.get("/", (req, res) => {
   res.render("login.html");
 });
 
+router.post("/", (req, res) => {
+  console.log(`URL : "/" get`);
+  res.render(req.body);
+});
+
 router.get("/main", (req, res) => {
   res.render("main.html");
 });
@@ -35,7 +40,10 @@ router.post("/main", (req, res) => {
     console.log(`URL : "/main" post else문`);
     res.redirect("/");
   }
+
 });
+
+// 회원가입 page에서 submit을 누르면 login 페이지가 호출됩니다. 그에 대한 처리 필요
 
 router.get("/signup", (req, res) => {
   res.render("signup.html");

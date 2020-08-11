@@ -1,4 +1,6 @@
 const models = require("./models");
+const multer = require('multer');
+const upload = multer({dest: './upload'});
 
 const users = [
   {
@@ -23,12 +25,20 @@ exports.get_login = (req, res) => {
 };
 exports.post_login = (req, res) => {
   console.log("로그인을 시도합니다.");
-  res.render("main.html");
+
+  if (findUser(req.body.id, req.body.pwd)) {
+    res.redirect("/main");
+    // res.send(req.body);
+  } else {
+    res.redirect("/");
+  }
+
+  //res.render("main.html");
 };
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ signup */
 exports.get_signup = (req, res) => {
-  res.render("signup.html");
+  res.send("signup.html");
 };
 exports.post_signup = (req, res) => {
   let sql = "INSERT INTO CLIENT VALUES (null, ?, ?, ?, now(), 0)";
@@ -53,18 +63,47 @@ exports.post_signup = (req, res) => {
 exports.get_main = (req, res) => {
   console.log("로그인에 성공하여 메인 페이지에 돌입합니다.");
 
-  res.render("main.html");
+  //res.render("main.html");
+
+  models.connection.query(
+    "SELECT * FROM PRODUCT WHERE isDeleted = 0",
+    (err, rows, fields) => {
+        res.send(rows);
+    })  
 };
 exports.post_main = (req, res) => {
-  if (findUser(req.body.id, req.body.pwd)) {
-    res.redirect("/main");
-    // res.send(req.body);
-  } else {
-    res.redirect("/");
-  }
+  let sql = 'INSERT INTO PRODUCT VALUES (null, 1, ?, ?, ?, now(), 0)';
+  //let image = '/image/' + req.file.filename; //multer가 filename을 겹치지 않게 설정
+  let productname = req.body.productName;
+  let price = req.body.price;
+  let context = req.body.context;
+
+  let params = [productname, price, context];
+
+  models.connection.query(sql, params, 
+      (err, rows, fields) => {
+          res.send(rows);
+          console.log(err);
+      }) 
+
+  console.log("상품을 추가합니다.");
+
 };
+
 exports.delete_main = (req, res) => {
   console.log("상품을 삭제합니다.");
+
+  
+  let sql = 'UPDATE PRODUCT SET isDeleted = 1 WHERE id = ?';
+  let params = [req.params.id];
+  //let params = req.body.id;
+
+  models.connection.query(sql, params, 
+    (err, rows, fields) => {
+       res.send(rows);
+        //res.redirect("/main")
+    })
+
 };
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ main_write */

@@ -2,20 +2,11 @@ const express = require("express");
 const nunjucks = require("nunjucks");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
-const fs = require('fs');
-const mysql = require('mysql');
-const multer = require('multer');
-const upload = multer({dest: './upload'});
-
-
-class App {
-
+class app {
   constructor() {
     this.app = express();
-
-    this.app.use(bodyParser.json());  
-    this.app.use(bodyParser.urlencoded({extended: true}));
 
     // 뷰엔진 셋팅
     this.setViewEngine();
@@ -23,12 +14,20 @@ class App {
     // 미들웨어 셋팅
     this.setMiddleWare();
 
+    // 정적 디렉토리
+    this.setStatic();
+
     // 로컬 변수
     this.setLocals();
 
     // 라우팅
     this.getRouting();
 
+    // 404 페이지를 찾을수가 없음
+    this.status404();
+
+    // 에러처리
+    this.errorHandler();
   }
 
   // 뷰엔진 셋팅
@@ -45,12 +44,18 @@ class App {
     this.app.use(logger("dev"));
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(cookieParser()); // res에서 cookie() 메서드 호출 가능
   }
 
+  // 정적 디렉토리
+  setStatic() {
+    this.app.use("/uploads", express.static("uploads"));
+  }
+
+  // 로컬 변수
   setLocals() {
-    // 템플릿 변수
     this.app.use((req, res, next) => {
-      this.app.locals.isLogin = true; // 무조건 비로그인 상태
+      this.app.locals.isLogin = true;
       this.app.locals.req_path = req.path;
       next();
     });
@@ -59,14 +64,23 @@ class App {
   // 라우팅
   getRouting() {
     this.app.use(require("./controllers"));
-    // controllers 안에 있는 index.js를 무조건 가져옴
+  }
+
+  // 404 페이지를 찾을 수 없음
+  status404() {
+    this.app.use((req, res, _) => {
+      res.status(404).render("common/404.html");
+    });
+  }
+
+  // 에러처리
+  errorHandler() {
+    this.app.use((err, req, res, _) => {
+      console.log(err);
+      res.status(500).render("common/500.html");
+    });
   }
 }
 
-
-
 // 파일 호출 시 인스턴스 생성
-
-//module.exports = new App();
-
-module.exports = new App().app;
+module.exports = new app().app;

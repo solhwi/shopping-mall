@@ -54,10 +54,10 @@ class ProductAdd extends Component {
     } 
 
     addProduct = () => {
-        const url = '/api/products';
+        const url = '/api/main';
         const formData = new FormData();
         formData.append('image', this.state.file)
-        formData.append('productname', this.state.productName)
+        formData.append('productName', this.state.productName)
         formData.append('price', this.state.price)
         formData.append('context', this.state.context)
         const config = {
@@ -109,7 +109,7 @@ class ProductAdd extends Component {
         return (
             <div>
                 <Button variant ="contained"
-                color="pink"
+                color="primary"
                 onClick={this.handleClickOpen}
                 >상품 추가
                 </Button>
@@ -125,7 +125,7 @@ class ProductAdd extends Component {
                         onChange={this.handleFileChange}
                         ></input>
                         <label htmlFor="raised-button-file">
-                            <Button variant="contained" color="pupple" component="span" name="file">
+                            <Button variant="contained" color="primary" component="span" name="file">
                                 {this.state.fileName === "" ? "Choice Product's Image" : this.state.fileName}
                             </Button>
                             
@@ -149,13 +149,13 @@ class ProductAdd extends Component {
 
                     <DialogActions>
                         <Button 
-                            variant="contained" color="pupple"
+                            variant="contained" color="primary"
                             onClick={this.handleFormSubmit}
                         >
                         추가
                         </Button>
                         <Button 
-                            variant="outlined" color="pupple"
+                            variant="outlined" color="primary"
                             onClick={this.handleClickClose}
                         >
                         닫기

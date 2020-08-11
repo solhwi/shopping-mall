@@ -27,8 +27,8 @@ class ProductDelete extends Component {
     });
   };
 
-  deleteCustomer(id) {
-    const url = "/api/customers/" + id;
+  deleteProduct(id) {
+    const url = "/api/main/" + id;
     fetch(url, {
       method: "DELETE",
     });
@@ -38,7 +38,7 @@ class ProductDelete extends Component {
   render() {
     return (
       <div>
-        <Button variant="contained" color="pink" onClick={this.handleClickOpen}>
+        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
           상품 삭제
         </Button>
         <Dialog open={this.state.open}>
@@ -51,7 +51,7 @@ class ProductDelete extends Component {
                 variant="contained"
                 color="primary"
                 onClick={(e) => {
-                  this.deleteCustomer(this.props.id);
+                  this.deleteProduct(this.props.id);
                 }}
               >
                 삭제

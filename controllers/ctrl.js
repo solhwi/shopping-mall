@@ -1,6 +1,5 @@
 const models = require("./models");
-const multer = require('multer');
-const upload = multer({dest: './upload'});
+
 
 const users = [
   {
@@ -70,14 +69,14 @@ exports.get_main = (req, res) => {
 };
 
 exports.post_main = (req, res) => {
-  let sql = 'INSERT INTO PRODUCT VALUES (null, 1, ?, ?, ?, now(), 0)';
-  //let image = '/image/' + req.file.filename; //multer가 filename을 겹치지 않게 설정
+  let sql = 'INSERT INTO PRODUCT VALUES (null, ?, ?, ?, ?, now(), 0)';
+  let image = '/uploads/' + req.file.filename; //multer가 filename을 겹치지 않게 설정
   //body가 비었음 현재
   let productname = req.body.productName;
   let price = req.body.price;
   let context = req.body.context; 
   console.log(req.body);
-  let params = [productname, price, context];
+  let params = [image, productname, price, context];
 
   models.connection.query(sql, params, 
       (err, rows, fields) => {

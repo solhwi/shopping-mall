@@ -19,6 +19,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import { response } from 'express';
 
 
 //로딩 animation
@@ -113,6 +114,12 @@ class App extends Component{
     }
   }
 
+  
+  progress = () => {
+    const {completed} = this.state;
+    this.setState( {completed: completed >= 100 ? 0 : completed+1})
+  }
+
   stateRefresh = () => {
     this.setState({
       products: '',
@@ -122,12 +129,6 @@ class App extends Component{
     .then (res => this.setState({products: res}))
     .catch(err => console.log(err));
 
-  }
-
-
-  progress = () => {
-    const {completed} = this.state;
-    this.setState( {completed: completed >= 100 ? 0 : completed+1})
   }
 
   componentDidMount(){
@@ -143,6 +144,12 @@ class App extends Component{
     console.log(response);
     const body = await response.json();
     console.log(body);
+    return body;
+  }
+
+  callLoginApi = async() => {
+    const log = await fetch('/api');
+    const body = await response.json();
     return body;
   }
 
@@ -165,22 +172,18 @@ class App extends Component{
             Company Name
           </Typography>
           
-          <form>
-          <button>
-          <a href = "/api">
-            log
-          </a>
-          </button>
-          </form>
-          
+          <form action="/" method="get" loginapi={this.callLoginApi}>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            type="submit"
           >
             Log In
           </IconButton>
+          </form>
+          
           
           <div className={classes.search}>
             <div className={classes.searchIcon}>

@@ -21,7 +21,7 @@ const findUser = (user_id, user_pwd) => {
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ login - "/" 과 같다 */
 exports.get_login = (req, res) => {
   console.log("로그인 페이지에 접근합니다.");
-  res.send("login.html");
+  res.render("login.html");
 };
 exports.post_login = (req, res) => {
   console.log("로그인을 시도합니다.");

@@ -4,12 +4,12 @@ const ctrl = require("./ctrl.js");
 const models = require("./models");
 
 // '/'는 login 여부에 관련된 부분을 처리한다.
-router.get("/api", ctrl.get_login);
-router.post("/api", ctrl.post_login);
+router.get("/", ctrl.get_login);
+router.post("/", ctrl.post_login);
 
 // '/signup;은 회원가입에 관련된 부분을 처리한다.
-router.get("/api/signup", ctrl.get_signup);
-router.post("/api/signup", ctrl.post_signup);
+router.get("/signup", ctrl.get_signup);
+router.post("/signup", ctrl.post_signup);
 
 // '/main'은 상품의 업로드에 관련된 부분을 처리한다.
 router.get("/api/main", ctrl.get_main);

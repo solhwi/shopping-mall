@@ -126,7 +126,7 @@ class ProductAdd extends Component {
                         ></input>
                         <label htmlFor="raised-button-file">
                             <Button variant="contained" color="primary" component="span" name="file">
-                                {this.state.fileName === "" ? "Choice Product's Image" : this.state.fileName}
+                                {this.state.fileName === "" ? "미리보기 이미지 선택" : this.state.fileName}
                             </Button>
                             
                         </label><br/><br/>
@@ -141,7 +141,7 @@ class ProductAdd extends Component {
                          onChange={this.handleValueChange}
                         ></TextField><br/>
                         <TextField
-                          label="상품 설명" type="text" name="context" 
+                          label="상품 설명 및 글제목" type="text" name="context" 
                          value={this.state.context}
                          onChange={this.handleValueChange}
                         ></TextField>

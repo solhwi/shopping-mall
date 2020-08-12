@@ -148,7 +148,7 @@ class App extends Component{
 
   render(){
     const {classes} = this.props;
-    const cellList = ["번호", "미리보기", "상품명", "가격", "제품설명", "설정"];
+    const cellList = ["번호", "미리보기", "제목", "가격", "상품명", "설정"];
     return (
       <div className={classes.root}>
            <AppBar position="static">
@@ -162,8 +162,21 @@ class App extends Component{
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            고객 관리 시스템
+            Company Name
           </Typography>
+          <form action="/" method="get">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+            type="submit"
+          >
+            Log In
+          </IconButton>
+
+          </form>
+          
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -179,11 +192,7 @@ class App extends Component{
           </div>
         </Toolbar>
       </AppBar>
-      <div className={classes.menu}>
-      <ProductAdd
-         stateRefresh={this.stateRefresh} 
-      />        
-      </div>
+     
                
         <Paper className={classes.paper}>
             <Table className={classes.table}>
@@ -221,7 +230,11 @@ class App extends Component{
             </TableBody>
          </Table>
         </Paper>
-        
+        <div className={classes.menu}>
+      <ProductAdd
+         stateRefresh={this.stateRefresh} 
+      />        
+      </div>
         
       </div>       
     );

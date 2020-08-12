@@ -71,6 +71,7 @@ exports.get_main = (req, res) => {
         res.send(rows);
     })  
 };
+
 exports.post_main = (req, res) => {
   let sql = 'INSERT INTO PRODUCT VALUES (null, 1, ?, ?, ?, now(), 0)';
   //let image = '/image/' + req.file.filename; //multer가 filename을 겹치지 않게 설정
@@ -90,21 +91,10 @@ exports.post_main = (req, res) => {
 
 };
 
-exports.delete_main = (req, res) => {
-  console.log("상품을 삭제합니다.");
+// exports.delete_main = (req, res) => {
+//   console.log("상품을 삭제합니다.");
 
-  
-  let sql = 'UPDATE PRODUCT SET isDeleted = 1 WHERE id = ?';
-  let params = [req.params.id];
-  //let params = req.body.id;
-
-  models.connection.query(sql, params, 
-    (err, rows, fields) => {
-       res.send(rows);
-        //res.redirect("/main")
-    })
-
-};
+// };
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ main_write */
 exports.get_main_write = (req, res) => {

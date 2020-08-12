@@ -38,7 +38,7 @@ exports.post_login = (req, res) => {
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ signup */
 exports.get_signup = (req, res) => {
-  res.send("signup.html");
+  res.render("signup.html");
 };
 exports.post_signup = (req, res) => {
   let sql = "INSERT INTO CLIENT VALUES (null, ?, ?, ?, now(), 0)";

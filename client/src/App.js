@@ -19,7 +19,6 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import { response } from 'express';
 
 
 //로딩 animation
@@ -110,15 +109,8 @@ class App extends Component{
     
     this.state = {
       products: '',
-      completed: 0,
-      loginhtml: ''
+      completed: 0
     }
-  }
-
-  
-  progress = () => {
-    const {completed} = this.state;
-    this.setState( {completed: completed >= 100 ? 0 : completed+1})
   }
 
   stateRefresh = () => {
@@ -129,7 +121,12 @@ class App extends Component{
     this.callApi()
     .then (res => this.setState({products: res}))
     .catch(err => console.log(err));
+  }
 
+  
+  progress = () => {
+    const {completed} = this.state;
+    this.setState( {completed: completed >= 100 ? 0 : completed+1})
   }
 
   componentDidMount(){
@@ -148,12 +145,7 @@ class App extends Component{
     return body;
   }
 
-  callLoginApi = async() => {
-    const log = await fetch('/api');
-    const body = await response.json();
-    return body;
-  }
-
+  // render("login.html");
   render(){
     const {classes} = this.props;
     const cellList = ["일련번호", "미리보기", "제목", "가격", "상품명", "설정"];
@@ -173,7 +165,7 @@ class App extends Component{
             Company Name
           </Typography>
           
-          <form action="/" method="get" loginapi={this.callLoginApi}>
+          {/* <form action="/" method="get"> */}
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -183,7 +175,7 @@ class App extends Component{
           >
             Log In
           </IconButton>
-          </form>
+          {/* </form> */}
           
           
           <div className={classes.search}>
@@ -252,4 +244,3 @@ class App extends Component{
 
 export default withStyles(styles)(App);
 
-//zzzzzzzzzzzzzzzzzzzzzzzzzzzz

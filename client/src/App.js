@@ -148,7 +148,7 @@ class App extends Component{
 
   render(){
     const {classes} = this.props;
-    const cellList = ["번호", "미리보기", "제목", "가격", "상품명", "설정"];
+    const cellList = ["일련번호", "미리보기", "제목", "가격", "상품명", "설정"];
     return (
       <div className={classes.root}>
            <AppBar position="static">
@@ -164,18 +164,19 @@ class App extends Component{
           <Typography className={classes.title} variant="h6" noWrap>
             Company Name
           </Typography>
-          <form action="/" method="get">
+          <button>
+          <a href = "./login.html">
+            log
+          </a>
+          </button>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            type="submit"
           >
             Log In
           </IconButton>
-
-          </form>
           
           <div className={classes.search}>
             <div className={classes.searchIcon}>

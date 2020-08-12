@@ -110,7 +110,8 @@ class App extends Component{
     
     this.state = {
       products: '',
-      completed: 0
+      completed: 0,
+      loginhtml: ''
     }
   }
 
@@ -250,3 +251,5 @@ class App extends Component{
 }
 
 export default withStyles(styles)(App);
+
+//zzzzzzzzzzzzzzzzzzzzzzzzzzzz

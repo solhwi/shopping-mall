@@ -106,5 +106,5 @@ exports.get_main_write = (req, res) => {
   res.redirect("/login");
 };
 exports.post_main_write = (req, res) => {
-  res.render("main/write.html");
-};
+ res.render("main/write.html");
+ };

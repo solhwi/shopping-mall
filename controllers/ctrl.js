@@ -21,7 +21,7 @@ const findUser = (user_id, user_pwd) => {
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ login - "/" 과 같다 */
 exports.get_login = (req, res) => {
   console.log("로그인 페이지에 접근합니다.");
-  res.render("login.html");
+  res.send("login.html");
 };
 exports.post_login = (req, res) => {
   console.log("로그인을 시도합니다.");
@@ -75,10 +75,11 @@ exports.get_main = (req, res) => {
 exports.post_main = (req, res) => {
   let sql = 'INSERT INTO PRODUCT VALUES (null, 1, ?, ?, ?, now(), 0)';
   //let image = '/image/' + req.file.filename; //multer가 filename을 겹치지 않게 설정
+  //body가 비었음 현재
   let productname = req.body.productName;
   let price = req.body.price;
-  let context = req.body.context;
-
+  let context = req.body.context; 
+  console.log(req.body);
   let params = [productname, price, context];
 
   models.connection.query(sql, params, 

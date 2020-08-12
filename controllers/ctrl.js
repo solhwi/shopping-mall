@@ -27,13 +27,11 @@ exports.post_login = (req, res) => {
   console.log("로그인을 시도합니다.");
 
   if (findUser(req.body.id, req.body.pwd)) {
-    res.redirect("/main");
-    // res.send(req.body);
-  } else {
-    res.redirect("/");
+    res.redirect("/api/main");
+  } 
+  else {
+    res.redirect("/login");
   }
-
-  //res.render("main.html");
 };
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ signup */
@@ -55,8 +53,7 @@ exports.post_signup = (req, res) => {
 
   console.log("회원가입에 성공했습니다.");
 
-  res.redirect("/");
-  // res.send(req.body);
+  res.redirect("/login");
 };
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ main */
@@ -92,14 +89,22 @@ exports.post_main = (req, res) => {
 
 };
 
-// exports.delete_main = (req, res) => {
-//   console.log("상품을 삭제합니다.");
+exports.delete_main = (req, res) => {
+  console.log("상품을 삭제합니다.");
+  let sql = 'UPDATE PRODUCT SET isDeleted = 1 WHERE id = ?';
+  let params = [req.params.id];
+  console.log(params);
+  console.log(req.body.id);
 
-// };
+  models.connection.query(sql, params, 
+  (err, rows, fields) => {
+      res.send(rows);
+  })
+};
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ main_write */
 exports.get_main_write = (req, res) => {
-  res.redirect("/");
+  res.redirect("/login");
 };
 exports.post_main_write = (req, res) => {
   res.render("main/write.html");

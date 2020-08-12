@@ -145,7 +145,6 @@ class App extends Component{
     return body;
   }
 
-  // render("login.html");
   render(){
     const {classes} = this.props;
     const cellList = ["일련번호", "미리보기", "제목", "가격", "상품명", "설정"];
@@ -165,16 +164,14 @@ class App extends Component{
             Company Name
           </Typography>
           
-          {/* <form action="/" method="get"> */}
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            type="submit"
-          >
-            Log In
-          </IconButton>
+            href = "/login"
+          >Log In</IconButton>
+          
           {/* </form> */}
           
           

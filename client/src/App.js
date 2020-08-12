@@ -164,11 +164,15 @@ class App extends Component{
           <Typography className={classes.title} variant="h6" noWrap>
             Company Name
           </Typography>
+          
+          <form>
           <button>
-          <a href = "./login.html">
+          <a href = "/api">
             log
           </a>
           </button>
+          </form>
+          
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -243,5 +247,3 @@ class App extends Component{
 }
 
 export default withStyles(styles)(App);
-
-//zzzzzzzzzzzzzzzzzzzzzzzz

@@ -178,7 +178,7 @@ class App extends Component{
     const cellList = ["일련번호", "미리보기", "제목", "가격", "상품명", "설정"];
     return (
       <div className={classes.root}>
-           <AppBar position="static">
+      <AppBar position="static">
         <Toolbar>
           <IconButton
             edge="start"
@@ -191,7 +191,7 @@ class App extends Component{
           <Typography className={classes.title} variant="h6" noWrap>
             Company Name
           </Typography>
-          
+{/*           
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -199,24 +199,22 @@ class App extends Component{
             aria-label="open drawer"
             href = "/login"
           >Log In</IconButton>
-          
-          {/* </form> */}
-          
-          
+           */}
+        
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
-              placeholder="Search"
+          <InputBase
+              placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              inputProps={{ 'aria-label': 'search' }}
               name = "searchKeyword"
               value = {this.state.searchKeyword}
-              onChange= {this.state.handleValueChange}
-              inputProps={{ 'aria-label': 'search' }}
+              onChange= {this.handleValueChange}
             />
           </div>
         </Toolbar>

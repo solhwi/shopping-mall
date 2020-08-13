@@ -109,18 +109,15 @@ class App extends Component{
     
     this.state = {
       products: '',
-      completed: 0,
-      searchKeyword: ''
+      completed: 0
     }
   }
 
   stateRefresh = () => {
     this.setState({
       products: '',
-      completed: 0,
-      searchKeyword: ''
+      completed: 0
     });
-
     this.callApi()
     .then (res => this.setState({products: res}))
     .catch(err => console.log(err));
@@ -148,32 +145,7 @@ class App extends Component{
     return body;
   }
 
-  handleValueChange = (e) => {
-    let nextState={}; //state 변수
-    nextState[e.target.name] = e.target.value;
-    this.setState(nextState);
-  }
-
   render(){
-    const filteredComponents = (data) => {
-      data = data.filter((c)=> {
-        return c.productName.indexOf(this.state.searchKeyword) > -1;
-      });
-        // data를 받았을 때 filter 함수 실행,
-        // indexof -> c.name에 searchKeyword가 있는지를 검토
-        return data.map( c => {
-          return( 
-          <Product
-            stateRefresh= {this.stateRefresh}
-            key={c.id}
-            id={c.id}
-            image={c.image}
-            productName={c.productName}
-            price={c.price}
-            context={c.context}
-          />);})
-
-    }
     const {classes} = this.props;
     const cellList = ["일련번호", "미리보기", "제목", "가격", "상품명", "설정"];
     return (
@@ -213,9 +185,6 @@ class App extends Component{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              name = "searchKeyword"
-              value = {this.state.searchKeyword}
-              onChange= {this.state.handleValueChange}
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
@@ -236,7 +205,17 @@ class App extends Component{
             </TableHead>
             <TableBody>
             {this.state.products && typeof this.state.products === 'object' 
-            ? filteredComponents(this.state.products)
+            ? this.state.products.map( c => {
+                return( 
+                <Product
+                  stateRefresh= {this.stateRefresh}
+                  key={c.id}
+                  id={c.id}
+                  image={c.image}
+                  productName={c.productName}
+                  price={c.price}
+                  context={c.context}
+                />);})
               : <TableRow>
                   <TableCell colSpan="6" align="center">
                     <CircularProgress

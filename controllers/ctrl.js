@@ -1,11 +1,14 @@
 const models = require("./models");
 
-
+/* 보안 키 추가 필요하고 보안 관련된 많은 것들이 필요함. */
 const users = [
   {
     user_id: `godgjwnsgur7`,
     user_pwd: `1111`,
-    /* 보안 키 추가 필요하고 보안 관련된 많은 것들이 필요함. */
+  },
+  {
+    user_id: `psh50`,
+    user_pwd: `4444`,
   },
 ];
 
@@ -15,6 +18,13 @@ const findUser = (user_id, user_pwd) => {
     (v) => v.user_id === user_id && v.user_pwd === user_pwd
   );
   return check_all;
+};
+
+const findUserIndex = (user_id, user_pwd) => {
+  // 일치하는 유저의 index값(유니크) 반환
+  return users.findIndex(
+    (v) => v.user_id === user_id && v.user_pwd === user_pwd
+  );
 };
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ login - "/" 과 같다 */
@@ -27,8 +37,7 @@ exports.post_login = (req, res) => {
 
   if (findUser(req.body.id, req.body.pwd)) {
     res.redirect("/api/main");
-  } 
-  else {
+  } else {
     res.redirect("/login");
   }
 };
@@ -64,41 +73,39 @@ exports.get_main = (req, res) => {
   models.connection.query(
     "SELECT * FROM PRODUCT WHERE isDeleted = 0",
     (err, rows, fields) => {
-        res.send(rows);
-    })  
+      res.send(rows);
+    }
+  );
 };
 
 exports.post_main = (req, res) => {
-  let sql = 'INSERT INTO PRODUCT VALUES (null, ?, ?, ?, ?, now(), 0)';
-  let image = '/uploads/' + req.file.filename; //multer가 filename을 겹치지 않게 설정
+  let sql = "INSERT INTO PRODUCT VALUES (null, ?, ?, ?, ?, now(), 0)";
+  let image = "/uploads/" + req.file.filename; //multer가 filename을 겹치지 않게 설정
   //body가 비었음 현재
   let productname = req.body.productName;
   let price = req.body.price;
-  let context = req.body.context; 
+  let context = req.body.context;
   console.log(req.body);
   let params = [image, productname, price, context];
 
-  models.connection.query(sql, params, 
-      (err, rows, fields) => {
-          res.send(rows);
-          console.log(err);
-      }) 
+  models.connection.query(sql, params, (err, rows, fields) => {
+    res.send(rows);
+    console.log(err);
+  });
 
   console.log("상품을 추가합니다.");
-
 };
 
 exports.delete_main = (req, res) => {
   console.log("상품을 삭제합니다.");
-  let sql = 'UPDATE PRODUCT SET isDeleted = 1 WHERE id = ?';
+  let sql = "UPDATE PRODUCT SET isDeleted = 1 WHERE id = ?";
   let params = [req.params.id];
   console.log(params);
   console.log(req.body.id);
 
-  models.connection.query(sql, params, 
-  (err, rows, fields) => {
-      res.send(rows);
-  })
+  models.connection.query(sql, params, (err, rows, fields) => {
+    res.send(rows);
+  });
 };
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ main_write */
@@ -106,5 +113,5 @@ exports.get_main_write = (req, res) => {
   res.redirect("/login");
 };
 exports.post_main_write = (req, res) => {
- res.render("main/write.html");
- };
+  res.render("main/write.html");
+};

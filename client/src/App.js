@@ -157,9 +157,10 @@ class App extends Component{
   render(){
     const filteredComponents = (data) => {
       data = data.filter((c)=> {
-        return c.name.indexOf(this.state.searchKeyword) > -1;
+        return c.productName.indexOf(this.state.searchKeyword) > -1;
       });
-
+        // data를 받았을 때 filter 함수 실행,
+        // indexof -> c.name에 searchKeyword가 있는지를 검토
         return data.map( c => {
           return( 
           <Product
@@ -261,31 +262,3 @@ class App extends Component{
 
 export default withStyles(styles)(App);
 
-
-// this.state.products.map( c => {
-//   return( 
-//   <Product
-//     stateRefresh= {this.stateRefresh}
-//     key={c.id}
-//     id={c.id}
-//     image={c.image}
-//     productName={c.productName}
-//     price={c.price}
-//     context={c.context}
-//   />);})
-
-
-// data.map( c => {
-//   return( 
-//   <Product
-//     stateRefresh= {this.stateRefresh}
-//     key={c.id}
-//     id={c.id}
-//     image={c.image}
-//     productName={c.productName}
-//     price={c.price}
-//     context={c.context}
-//   />);})
-
-
-// zzzzzzzzzzzzzz

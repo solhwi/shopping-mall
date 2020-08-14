@@ -193,16 +193,14 @@ class App extends Component{
           <Typography className={classes.title} variant="h6" noWrap>
             Company Name
           </Typography>
-          
-          <form>
+        
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            href = "/login"
+            href = "http://localhost:5000/login"
           >Log In</IconButton>
-          </form>
           
            
         

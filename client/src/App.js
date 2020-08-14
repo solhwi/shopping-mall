@@ -154,6 +154,8 @@ class App extends Component{
     this.setState(nextState);
   }
 
+  // handleLogin
+
   render(){
     const filteredComponents = (data) => {
       data = data.filter((c)=> {
@@ -191,7 +193,8 @@ class App extends Component{
           <Typography className={classes.title} variant="h6" noWrap>
             Company Name
           </Typography>
-{/*           
+          
+          <form>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -199,7 +202,9 @@ class App extends Component{
             aria-label="open drawer"
             href = "/login"
           >Log In</IconButton>
-           */}
+          </form>
+          
+           
         
           <div className={classes.search}>
             <div className={classes.searchIcon}>

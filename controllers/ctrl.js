@@ -7,6 +7,10 @@ const users = [
     user_pwd: `1111`,
     /* 보안 키 추가 필요하고 보안 관련된 많은 것들이 필요함. */
   },
+  {
+    user_id: `psh50`,
+    user_pwd: `4444`,
+  }
 ];
 
 const findUser = (user_id, user_pwd) => {
@@ -17,6 +21,11 @@ const findUser = (user_id, user_pwd) => {
   return check_all;
 };
 
+const findUserIndex = (user_id, user_pwd) => {
+  // 일치하는 유저의 index값(유니크) 반환
+  return users.findIndex( v => (v.user_id === user_id && v.user_pwd === user_pwd) );
+}
+
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ login - "/" 과 같다 */
 exports.get_login = (req, res) => {
   console.log("로그인 페이지에 접근합니다.");
@@ -24,11 +33,14 @@ exports.get_login = (req, res) => {
 };
 exports.post_login = (req, res) => {
   console.log("로그인을 시도합니다.");
-
-  if (findUser(req.body.id, req.body.pwd)) {
-    res.redirect("/api/main");
+  const body = req.body;
+  if (findUser( body.user_id, body.user_pwd ) ) {
+    // 해당유저가 존재한다면
+        req.session.user_uid = findUserIndex( body.user_id, body.user_pwd ); //유니크한 값 유저 색인 값 저장
+        res.redirect("/api/main");
   } 
   else {
+    console.log("로그인 실패")
     res.redirect("/login");
   }
 };

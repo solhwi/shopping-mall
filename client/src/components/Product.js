@@ -5,6 +5,10 @@ import TableCell from '@material-ui/core/TableCell';
 
 
 class Product extends Component{
+    constructor(props){
+        super(props);
+    }
+
     render(){
       return(
             <TableRow>
@@ -17,6 +21,7 @@ class Product extends Component{
                 <ProductDelete 
                     stateRefresh={this.props.stateRefresh}
                     id={this.props.id}
+                    isNotLogin={this.props.isNotLogin}
                 />
                 </TableCell>
             </TableRow>

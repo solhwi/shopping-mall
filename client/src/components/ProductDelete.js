@@ -38,11 +38,15 @@ class ProductDelete extends Component {
   render() {
     return (
       <div>
-        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
-          상품 삭제
-        </Button>
+        {/* <Dialog open={this.props.isNotLogin}>  */}
+        {/* 비로그인 상태일 시 상품삭제를 띄우면 안됨 */}
+          <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
+            상품 삭제
+          </Button>
+        {/* </Dialog> */}
+        
         <Dialog open={this.state.open}>
-          <DialogTitle onClose={this.handleClose}>! Warning</DialogTitle>
+          <DialogTitle onClick={this.handleClickClose}>! Warning</DialogTitle>
           <DialogContent>
             <Typography>상품 및 관련 정보가 모두 삭제됩니다.</Typography>
             <br />

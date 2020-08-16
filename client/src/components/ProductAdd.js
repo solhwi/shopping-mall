@@ -108,18 +108,15 @@ class ProductAdd extends Component {
 
         return (
             <div>
-                {/* <Dialog open={this.props.isNotLogin}> */}
-                    {/* 비로그인 상태일 시 상품추가를 띄우면 안됨 */}
-                    <Button variant ="contained"
-                    color="primary"
-                    onClick={this.handleClickOpen}
-                    >상품 추가
-                    </Button>
-                {/* </Dialog> */}
                 
-
-
-                <Dialog open={this.state.open} onClose={this.handleClickClose}>
+                <Button variant ="contained"
+                color="primary"
+                onClick={this.handleClickOpen}
+                >상품 추가
+                </Button>
+                
+                
+                <Dialog open={this.state.open && this.props.isNotLogin} onClose={this.handleClickClose}>
                     <DialogTitle>상품을 추가하세요.</DialogTitle>
                     <DialogContent>
                         <input className={classes.hidden} 

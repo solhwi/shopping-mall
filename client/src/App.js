@@ -118,7 +118,7 @@ class App extends Component{
       completed: 0,
       searchKeyword: '',
       open: false,
-      isNotLogin: true
+      isNotLogin: false
     }
   }
 
@@ -206,14 +206,14 @@ class App extends Component{
             </Typography>
         
           
-          {/* <IconButton 
+          <IconButton 
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            href = "http://localhost:5000/login"
-          >Login</IconButton>
-           */}
+            href = "http://localhost:5000/signup"
+          >Sign up</IconButton>
+          
         
           <div className={classes.search}>
             <div className={classes.searchIcon}>

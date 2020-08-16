@@ -2,6 +2,7 @@ import React, {Component} from 'react'; // {component}가 있어야 extends Comp
 import './App.css';
 import Product from './components/Product';
 import ProductAdd from './components/ProductAdd';
+import ProductMenu from './components/ProductMenu';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -19,6 +20,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import { Menu } from '@material-ui/core';
 
 
 //로딩 animation
@@ -98,6 +100,10 @@ inputInput: {
 },
 progress:{
   margin: theme.spacing.unit*2
+},
+
+hidden: {
+    display: 'none'
 }
 
 })
@@ -110,7 +116,9 @@ class App extends Component{
     this.state = {
       products: '',
       completed: 0,
-      searchKeyword: ''
+      searchKeyword: '',
+      open: false,
+      isNotLogin: true
     }
   }
 
@@ -118,7 +126,8 @@ class App extends Component{
     this.setState({
       products: '',
       completed: 0,
-      searchKeyword: ''
+      searchKeyword: '',
+      open: false
     });
 
     this.callApi()
@@ -154,8 +163,6 @@ class App extends Component{
     this.setState(nextState);
   }
 
-  // handleLogin
-
   render(){
     const filteredComponents = (data) => {
       data = data.filter((c)=> {
@@ -166,6 +173,7 @@ class App extends Component{
         return data.map( c => {
           return( 
           <Product
+            isNotLogin={this.state.isNotLogin}
             stateRefresh= {this.stateRefresh}
             key={c.id}
             id={c.id}
@@ -182,27 +190,30 @@ class App extends Component{
       <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Company Name
-          </Typography>
+          </IconButton> */}
+          <ProductMenu 
+            isNotLogin= {this.state.isNotLogin}
+          />
+            <Typography className={classes.title} variant="h6" onClick="window.location.reload()">
+              Company Name
+            </Typography>
         
-          <IconButton
+          
+          {/* <IconButton 
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
             href = "http://localhost:5000/login"
-          >Log In</IconButton>
-          
-           
+          >Login</IconButton>
+           */}
         
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -253,6 +264,7 @@ class App extends Component{
         <div className={classes.menu}>
       <ProductAdd
          stateRefresh={this.stateRefresh} 
+         isNotLogin={this.state.isNotLogin}
       />        
       </div>
         

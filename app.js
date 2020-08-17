@@ -4,7 +4,6 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const bcrypt = require("bcrypt-nodejs");
 
 class app {
   constructor() {
@@ -47,11 +46,16 @@ class app {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(cookieParser()); // res에서 cookie() 메서드 호출 가능
-    this.app.use(bodyParser.urlencoded({extended: false}));
     this.app.use(session({
-        secret: 'ambc@!vsmkv#!&*!#EDNAnsv#!$()_*#@',
+        name: 'sid', 
         resave: false,
-        saveUninitialized: true
+        saveUninitialized: false,
+        secret: 'sdfsdsd',
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 2,
+            sameSite: true
+        },
+        //id: ''
     }));
   }
 

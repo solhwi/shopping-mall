@@ -3,7 +3,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
-import TextField from "@material-ui/core/TextField"; //?? 이새끼머임
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
@@ -39,9 +38,9 @@ class ProductDelete extends Component {
     return (
       <div>
       
-          <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
+        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
             상품 삭제
-          </Button>
+        </Button>
         
         <Dialog open={this.state.open && this.props.isLogin}>
           <DialogTitle onClick={this.handleClickClose}>! Warning</DialogTitle>
@@ -55,16 +54,12 @@ class ProductDelete extends Component {
                 onClick={(e) => {
                   this.deleteProduct(this.props.id);
                 }}
-              >
-                삭제
-              </Button>
+              >삭제</Button>
               <Button
                 variant="outlined"
                 color="primary"
                 onClick={this.handleClickClose}
-              >
-                닫기
-              </Button>
+              >닫기</Button>
             </DialogActions>
           </DialogContent>
         </Dialog>

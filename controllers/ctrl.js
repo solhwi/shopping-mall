@@ -1,9 +1,27 @@
 const models = require("./models");
 
 exports.get_login = (req, res) => {
-  console.log("로그인 페이지에 접근합니다.");
-  res.render("login.html");
+  const key = {
+    id: req.session.user_id,
+    name: req.session.name
+  }
+  console.log(key);
+  res.send(key);
 };
+
+exports.get_logout = (req, res) => {
+  // 로그아웃 처리 - 세션 삭제 후 리다이렉트
+  console.log("로그아웃을 시도합니다.");
+  //console.log(req.session.cookie.id);
+  //delete req.session.cookie.id;
+  //console.log(req.session.cookie.id);
+
+  req.session.destroy() // 세션 삭제
+  res.clearCookie("sid")
+
+  res.redirect('http://localhost:3000');
+
+}
 
 exports.post_login = (req, res) => {
   console.log("로그인을 시도합니다.");
@@ -26,17 +44,17 @@ exports.post_login = (req, res) => {
             break;
           }
         }
-    
         if(isID){
           if(req.body.password === rows[count].password) {
             isPassword = true;
           }}
-
         if(isPassword) {
           console.log("로그인 성공");
-          res.send(rows[count]); // 5000/login에게 3000으로 가라고 명령
-        }
 
+          req.session.user_id = rows[count].id;
+          req.session.name = rows[count].name;
+          res.send(rows[count]);
+        }
         else {
           console.log("로그인 실패");
           res.redirect("http://localhost:3000");
@@ -93,7 +111,6 @@ exports.post_main = (req, res) => {
           res.send(rows);
           console.log(err);
       }) 
-
   console.log("상품을 추가합니다.");
 
 };
@@ -128,25 +145,13 @@ exports.delete_main = (req, res) => {
   // const body = req.body;
   // if (findUser( body.user_id, body.user_pwd ) ) {
   //   // 해당유저가 존재한다면
-  //       req.session.user_uid = findUserIndex( body.user_id, body.user_pwd ); //유니크한 값 유저 색인 값 저장
+  //    req.session.user_uid = findUserIndex( body.user_id, body.user_pwd ); //유니크한 값 유저 색인 값 저장
   //       res.redirect("/api/main");
   // } 
   // else {
   //   console.log("로그인 실패")
   //   res.redirect("/login");
   // }
-
-  
-  //res.render("main.html");
-
-  // SELECT 필드1, 필드2, 필드3 FROM 테이블명
-  // id와 password의 행들을 가져오는 코드
-  // 처음에 다 가져온 후 배열에 저장하고 시작할 시 이 곳에 있거나, 새로운 router를 생성해야함
-  // models.connection.query(
-  //   "SELECT id, password FROM PRODUCT WHERE isDeleted = 0",  
-  //   (err, rows, fields) => {
-  //       res.send(rows);
-  //   })
 
   // const users = [
 //   {

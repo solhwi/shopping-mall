@@ -3,6 +3,7 @@ import './App.css';
 import Product from './components/Product';
 import ProductAdd from './components/ProductAdd';
 import ProductMenu from './components/ProductMenu';
+
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -11,16 +12,16 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import {withStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import { Menu } from '@material-ui/core';
+// import { resolveInclude } from 'ejs';
+// import MenuIcon from '@material-ui/icons/Menu';
+// import { Menu } from '@material-ui/core';
 
 
 //로딩 animation
@@ -118,16 +119,31 @@ class App extends Component{
       completed: 0,
       searchKeyword: '',
       open: false,
-      isLogin: false
+      isLogin: false,
+      name:''
     }
+
+    this.isLoginApi()
+      .then (res => {
+        console.log(res.id);
+        if(res.id){
+          this.state.isLogin = true;
+          this.state.name = res.name;
+        }
+      })
+      .catch(err => console.log(err));
+  } 
+
+  isLoginApi = async() => {
+    const response = await fetch('/login');
+    const body = await response.json();
+    return body;
   }
 
   isLoginRefresh = (who) => {
     this.setState({
       isLogin: who
     })
-    
-    console.log(this.state.isLogin);
   }
 
   stateRefresh = () => {
@@ -157,11 +173,8 @@ class App extends Component{
   }
 
   callApi = async() => {
-    //const response = await fetch('/api/products');
     const response = await fetch('/api/main');
-    console.log(response);
     const body = await response.json();
-    console.log(body);
     return body;
   }
 
@@ -198,23 +211,15 @@ class App extends Component{
       <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton> */}
           <ProductMenu 
             isLogin= {this.state.isLogin}
             isLoginRefresh= {this.isLoginRefresh}
+            name = {this.state.name}
           />
-            
+          
           <Typography className={classes.title} variant="h6" href="http://localhost:3000">
             Sound Factory
           </Typography>
-        
           
           <IconButton 
             edge="start"
@@ -229,11 +234,11 @@ class App extends Component{
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-          <InputBase
+            <InputBase
               placeholder="Search…"
               classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
+              root: classes.inputRoot,
+              input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
               name = "searchKeyword"
@@ -243,8 +248,7 @@ class App extends Component{
           </div>
         </Toolbar>
       </AppBar>
-     
-               
+        
         <Paper className={classes.paper}>
             <Table className={classes.table}>
             <TableHead>
@@ -256,6 +260,7 @@ class App extends Component{
                 })}
               </TableRow>
             </TableHead>
+            
             <TableBody>
             {this.state.products && typeof this.state.products === 'object' 
             ? filteredComponents(this.state.products)
@@ -272,12 +277,11 @@ class App extends Component{
          </Table>
         </Paper>
         <div className={classes.menu}>
-      <ProductAdd
+          <ProductAdd
          stateRefresh={this.stateRefresh} 
          isLogin={this.state.isLogin}
-      />        
-      </div>
-        
+         />        
+        </div>
       </div>       
     );
   } 

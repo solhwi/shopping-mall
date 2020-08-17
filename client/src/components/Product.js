@@ -18,12 +18,11 @@ class Product extends Component{
                 <TableCell>{this.props.price}</TableCell> 
                 <TableCell>{this.props.productName}</TableCell> 
                 <TableCell>
-                <ProductDelete 
+                    <ProductDelete 
                     stateRefresh={this.props.stateRefresh}
                     id={this.props.id}
                     isLogin={this.props.isLogin}
-                />
-                </TableCell>
+                /></TableCell>
             </TableRow>
         );
     }

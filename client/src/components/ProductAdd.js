@@ -150,15 +150,11 @@ class ProductAdd extends Component {
                         <Button 
                             variant="contained" color="primary"
                             onClick={this.handleFormSubmit}
-                        >
-                        추가
-                        </Button>
+                        >추가</Button>
                         <Button 
                             variant="outlined" color="primary"
                             onClick={this.handleClickClose}
-                        >
-                        닫기
-                        </Button>
+                        >닫기</Button>
                     </DialogActions>
                 </Dialog>
             </div>

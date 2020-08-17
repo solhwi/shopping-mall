@@ -1,9 +1,9 @@
 const models = require("./models");
 
-exports.get_login = (req, res) => {
-  console.log("로그인 페이지에 접근합니다.");
-  res.render("login.html");
-};
+// exports.get_login = (req, res) => {
+//   console.log("로그인 페이지에 접근합니다.");
+//   res.render("login.html");
+// };
 
 exports.post_login = (req, res) => {
   console.log("로그인을 시도합니다.");

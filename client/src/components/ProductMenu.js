@@ -18,8 +18,6 @@ const styles = theme => ({
     }
 })
 
-
-
 class ProductMenu extends Component {
 
    constructor(props) {
@@ -112,23 +110,20 @@ class ProductMenu extends Component {
                     onClick={this.handleClickOpen}>
                     </MenuIcon>
                 </IconButton>
-                
-                {/* <Dialog > 비로그인 상태일 시 로그인이 필요합니다. 로그인 상태일 시 회원정보를 띄운다.*/}
-                {/*  open={classes.isNotLogin}  */}
-                
-                    <Dialog open={this.state.open && !this.props.isLogin} onClose={this.handleClickClose}>
-                        <DialogTitle>로그인이 필요합니다.</DialogTitle>
-                        <DialogContent>
-                            <TextField
-                            label="ID" type="text" name="id" 
-                            value={this.state.id}
-                            onChange={this.handleValueChange}
-                            ></TextField><br/>
-                            <TextField
-                            label="Password" type="password" name="password" 
-                            value={this.state.password}
-                            onChange={this.handleValueChange}
-                            ></TextField><br/>
+
+                <Dialog open={this.state.open && !this.props.isLogin} onClose={this.handleClickClose}>
+                    <DialogTitle>로그인이 필요합니다.</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                        label="ID" type="text" name="id" 
+                        value={this.state.id}
+                        onChange={this.handleValueChange}
+                        ></TextField><br/>
+                        <TextField
+                        label="Password" type="password" name="password" 
+                        value={this.state.password}
+                        onChange={this.handleValueChange}
+                        ></TextField><br/>
                         </DialogContent>
 
                         <DialogActions>

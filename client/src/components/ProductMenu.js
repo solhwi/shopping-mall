@@ -66,10 +66,9 @@ class ProductMenu extends Component {
             .then((response) => {
                 console.log(response);
                   if(response.data.id === this.state.id){
-                    this.setState({
-                        name: response.data.name
-                    })
-                   this.props.isLoginRefresh(true)
+                    // this.props.isLoginRefresh(true)
+                    this.props.isLoginApi();
+                    window.location.reload();       
                 } 
                 else{
                    this.props.isLoginRefresh(false)

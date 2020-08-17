@@ -215,6 +215,7 @@ class App extends Component{
             isLogin= {this.state.isLogin}
             isLoginRefresh= {this.isLoginRefresh}
             name = {this.state.name}
+            isLoginApi = {this.isLoginApi}
           />
           
           <Typography className={classes.title} variant="h6" href="http://localhost:3000">

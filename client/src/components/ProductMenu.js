@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {post} from 'axios'
+import {post} from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -28,6 +28,7 @@ class ProductMenu extends Component {
         this.state = {
             id: '',
             password: '',
+            name: '',
             open: false, // dialog가 열려있는 지의 여부
         }
     }
@@ -35,16 +36,14 @@ class ProductMenu extends Component {
     handleClickOpen = () => {
         //바인딩 처리를 하는 함수의 형태???
         this.setState({
-          id: '',
-          password: '',
           open: true
         });
     }
 
     handleClickClose = () => {
         this.setState({
-            id: '',
-            password: '',
+            id:'',
+            password:'',
             open: false, // dialog가 열려있는 지의 여부
         })
 
@@ -63,32 +62,35 @@ class ProductMenu extends Component {
         return post(url, formData, config);
     } //데이터 전송 코드
 
-
     handleFormSubmit = (e) => {
         e.preventDefault() //오류없게 전달되도록 부르는 함수 
         this.sendProperty()
             .then((response) => {
-                window.location.reload();
-                //props로 전달받은 stateRefresh 사용
-            })
-        
-            this.setState({
-                id: '',
-                password: '',
-            })
-            
+                console.log(response);
+                if(response.data.id === this.state.id){
+                    this.setState({
+                        name: response.data.name
+                    })
+                   this.props.isLoginRefresh(true)
+                } 
+                else{
+                   this.props.isLoginRefresh(false)
+                   this.setState({
+                    id: '',
+                    password: ''
+                })
+               }
+             })        
     }
 
     handleValueChange = (e) => {
-        let nextState = {}
-        nextState[e.target.name] = e.target.value
-        this.setState(nextState)
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
     }
 
     render() {
-        
         const {classes} = this.props;
-
         return (
             <div>
                 <IconButton
@@ -104,7 +106,8 @@ class ProductMenu extends Component {
                 
                 {/* <Dialog > 비로그인 상태일 시 로그인이 필요합니다. 로그인 상태일 시 회원정보를 띄운다.*/}
                 {/*  open={classes.isNotLogin}  */}
-                    <Dialog open={this.state.open} onClose={this.handleClickClose}>
+                
+                    <Dialog open={this.state.open && !this.props.isLogin} onClose={this.handleClickClose}>
                         <DialogTitle>로그인이 필요합니다.</DialogTitle>
                         <DialogContent>
                             <TextField
@@ -117,7 +120,6 @@ class ProductMenu extends Component {
                             value={this.state.password}
                             onChange={this.handleValueChange}
                             ></TextField><br/>
-
                         </DialogContent>
 
                         <DialogActions>
@@ -135,7 +137,29 @@ class ProductMenu extends Component {
                             </Button>
                         </DialogActions>
                     </Dialog>
-                {/* </Dialog> */}
+
+                    <Dialog open={this.state.open && this.props.isLogin} onClose={this.handleClickClose}>
+                        <DialogTitle>{this.state.name}님 반갑습니다.</DialogTitle>
+                        <DialogContent>
+                             <img src = "https:/placeimg.com/64/64/any"/><br/>
+                             <b>{this.state.name}</b> <b>, 25</b><br/>                       
+                        </DialogContent>
+
+                        <DialogActions>
+                            <Button 
+                                variant="contained" color="primary"
+                                onClick={this.handleFormSubmit}
+                            >
+                            로그아웃
+                            </Button>
+                            <Button 
+                                variant="outlined" color="primary"
+                                onClick={this.handleClickClose}
+                            >
+                            닫기
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
             </div>
         )
     }

@@ -118,8 +118,16 @@ class App extends Component{
       completed: 0,
       searchKeyword: '',
       open: false,
-      isNotLogin: false
+      isLogin: false
     }
+  }
+
+  isLoginRefresh = (who) => {
+    this.setState({
+      isLogin: who
+    })
+    
+    console.log(this.state.isLogin);
   }
 
   stateRefresh = () => {
@@ -173,7 +181,7 @@ class App extends Component{
         return data.map( c => {
           return( 
           <Product
-            isNotLogin={this.state.isNotLogin}
+            isLogin={this.state.isLogin}
             stateRefresh= {this.stateRefresh}
             key={c.id}
             id={c.id}
@@ -199,11 +207,13 @@ class App extends Component{
             <MenuIcon />
           </IconButton> */}
           <ProductMenu 
-            isNotLogin= {this.state.isNotLogin}
+            isLogin= {this.state.isLogin}
+            isLoginRefresh= {this.isLoginRefresh}
           />
-            <Typography className={classes.title} variant="h6" onClick="window.location.reload()">
-              Company Name
-            </Typography>
+            
+          <Typography className={classes.title} variant="h6" href="http://localhost:3000">
+            Sound Factory
+          </Typography>
         
           
           <IconButton 
@@ -264,7 +274,7 @@ class App extends Component{
         <div className={classes.menu}>
       <ProductAdd
          stateRefresh={this.stateRefresh} 
-         isNotLogin={this.state.isNotLogin}
+         isLogin={this.state.isLogin}
       />        
       </div>
         

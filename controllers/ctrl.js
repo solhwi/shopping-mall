@@ -10,10 +10,12 @@ exports.post_login = (req, res) => {
   let isID = false;
   let isPassword = false;
   let count = 0;
-  let reqId = req.body.id;
+  let reqId = req.body.id; //req의 어디에 id가 들어있는가?
+  
+  //console.log(req.body);가 0이었던 이유는 multer로 받지 않았기 때문이다. formdata는 multer로 받아야함
 
   models.connection.query(
-    "SELECT id, password FROM CLIENT WHERE isDeleted = 0",  
+    "SELECT id, password, name FROM CLIENT WHERE isDeleted = 0",  
     (err, rows, fields) => {
         //console.log(rows);
         for(var i=0; i<rows.length; i++)
@@ -24,6 +26,7 @@ exports.post_login = (req, res) => {
             break;
           }
         }
+    
         if(isID){
           if(req.body.password === rows[count].password) {
             isPassword = true;
@@ -31,13 +34,12 @@ exports.post_login = (req, res) => {
 
         if(isPassword) {
           console.log("로그인 성공");
-          res.send(rows[count].id); // 5000/login에게 3000으로 가라고 명령
-          res.redirect("http://localhost:3000");
+          res.send(rows[count]); // 5000/login에게 3000으로 가라고 명령
         }
 
         else {
           console.log("로그인 실패");
-          res.redirect("/login");
+          res.redirect("http://localhost:3000");
         }
     })
 

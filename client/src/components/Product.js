@@ -21,7 +21,7 @@ class Product extends Component{
                 <ProductDelete 
                     stateRefresh={this.props.stateRefresh}
                     id={this.props.id}
-                    isNotLogin={this.props.isNotLogin}
+                    isLogin={this.props.isLogin}
                 />
                 </TableCell>
             </TableRow>

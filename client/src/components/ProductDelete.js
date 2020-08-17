@@ -43,7 +43,7 @@ class ProductDelete extends Component {
             상품 삭제
           </Button>
         
-        <Dialog open={this.state.open && this.props.isNotLogin}>
+        <Dialog open={this.state.open && this.props.isLogin}>
           <DialogTitle onClick={this.handleClickClose}>! Warning</DialogTitle>
           <DialogContent>
             <Typography>상품 및 관련 정보가 모두 삭제됩니다.</Typography>

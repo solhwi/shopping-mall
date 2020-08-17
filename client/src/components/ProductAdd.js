@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {post} from 'axios'
+import {post} from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -19,7 +19,6 @@ const styles = theme => ({
 
 
 class ProductAdd extends Component {
-
 
     constructor(props) {
         super(props);
@@ -98,9 +97,9 @@ class ProductAdd extends Component {
     }
 
     handleValueChange = (e) => {
-        let nextState = {}
-        nextState[e.target.name] = e.target.value
-        this.setState(nextState)
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
     }
 
     render() {
@@ -108,7 +107,6 @@ class ProductAdd extends Component {
 
         return (
             <div>
-                
                 <Button variant ="contained"
                 color="primary"
                 onClick={this.handleClickOpen}
@@ -116,7 +114,7 @@ class ProductAdd extends Component {
                 </Button>
                 
                 
-                <Dialog open={this.state.open && this.props.isNotLogin} onClose={this.handleClickClose}>
+                <Dialog open={this.state.open && this.props.isLogin} onClose={this.handleClickClose}>
                     <DialogTitle>상품을 추가하세요.</DialogTitle>
                     <DialogContent>
                         <input className={classes.hidden} 

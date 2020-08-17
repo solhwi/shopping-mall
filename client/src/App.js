@@ -126,8 +126,6 @@ class App extends Component{
     this.setState({
       isLogin: who
     })
-    
-    console.log(this.state.isLogin);
   }
 
   stateRefresh = () => {

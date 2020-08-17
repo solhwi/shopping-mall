@@ -89,6 +89,15 @@ class ProductMenu extends Component {
         this.setState(nextState);
     }
 
+    doLogout = () => {
+        this.props.isLoginRefresh(false)
+                   this.setState({
+                    id: '',
+                    password: ''
+                })
+    }
+
+
     render() {
         const {classes} = this.props;
         return (
@@ -148,7 +157,7 @@ class ProductMenu extends Component {
                         <DialogActions>
                             <Button 
                                 variant="contained" color="primary"
-                                onClick={this.handleFormSubmit}
+                                onClick={this.doLogout}
                             >
                             로그아웃
                             </Button>

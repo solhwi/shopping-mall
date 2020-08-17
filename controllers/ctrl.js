@@ -12,15 +12,9 @@ exports.get_login = (req, res) => {
 exports.get_logout = (req, res) => {
   // 로그아웃 처리 - 세션 삭제 후 리다이렉트
   console.log("로그아웃을 시도합니다.");
-  //console.log(req.session.cookie.id);
-  //delete req.session.cookie.id;
-  //console.log(req.session.cookie.id);
-
   req.session.destroy() // 세션 삭제
   res.clearCookie("sid")
-
   res.redirect('http://localhost:3000');
-
 }
 
 exports.post_login = (req, res) => {

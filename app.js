@@ -54,8 +54,7 @@ class app {
         cookie: {
             maxAge: 1000 * 60 * 60 * 2,
             sameSite: true
-        },
-        //id: ''
+        }
     }));
   }
 

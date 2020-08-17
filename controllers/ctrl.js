@@ -44,7 +44,6 @@ exports.post_login = (req, res) => {
           }}
         if(isPassword) {
           console.log("로그인 성공");
-
           req.session.user_id = rows[count].id;
           req.session.name = rows[count].name;
           res.send(rows[count]);
@@ -121,53 +120,3 @@ exports.delete_main = (req, res) => {
       res.send(rows);
   })
 };
-
- // exports.post_logout = (req, res) => {
-
-//   console.log("로그아웃 되었습니다.");
-
-//   let sql = 'UPDATE CLIENT SET isLogin = 0 WHERE id = ?';
-//   let reqId = req.body.id; 
-//   models.connection.query(sql, reqId, 
-//   (err, rows, fields) => {})
-  
-//   res.redirect("http://localhost:3000"); // 5000/login에게 3000으로 가라고 명령
-
-// }
-
-
-  // const body = req.body;
-  // if (findUser( body.user_id, body.user_pwd ) ) {
-  //   // 해당유저가 존재한다면
-  //    req.session.user_uid = findUserIndex( body.user_id, body.user_pwd ); //유니크한 값 유저 색인 값 저장
-  //       res.redirect("/api/main");
-  // } 
-  // else {
-  //   console.log("로그인 실패")
-  //   res.redirect("/login");
-  // }
-
-  // const users = [
-//   {
-//     user_id: `godgjwnsgur7`,
-//     user_pwd: `1111`,
-//     /* 보안 키 추가 필요하고 보안 관련된 많은 것들이 필요함. */
-//   },
-//   {
-//     user_id: `psh50`,
-//     user_pwd: `4444`,
-//   }
-// ];
-
-// const findUser = (user_id, user_pwd) => {
-//   // id와 password가 일치하는 유저를 찾는 함수, 없으면 undefined 반환
-//   const check_all = users.find(
-//     (v) => v.user_id === user_id && v.user_pwd === user_pwd
-//   );
-//   return check_all;
-// };
-
-// const findUserIndex = (user_id, user_pwd) => {
-//   // 일치하는 유저의 index값(유니크) 반환
-//   return users.findIndex( v => (v.user_id === user_id && v.user_pwd === user_pwd) );
-// }

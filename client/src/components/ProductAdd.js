@@ -16,8 +16,6 @@ const styles = theme => ({
     }
 })
 
-
-
 class ProductAdd extends Component {
 
     constructor(props) {
@@ -67,7 +65,6 @@ class ProductAdd extends Component {
         return post(url, formData, config);
     } //데이터 전송 코드
 
-
     handleFormSubmit = (e) => {
         e.preventDefault() //오류없게 전달되도록 부르는 함수 
         this.addProduct()
@@ -83,9 +80,7 @@ class ProductAdd extends Component {
                 price: '',
                 context: '',
             })
-            
     }
-
     handleFileChange = (e) => {
         //e는 이벤트 변수, 이벤트가 발생한 것.
         //e.target이면 그 이벤트가 발생한 객체 
@@ -95,16 +90,13 @@ class ProductAdd extends Component {
             fileName: e.target.value
         })
     }
-
     handleValueChange = (e) => {
         let nextState = {};
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
     }
-
     render() {
         const {classes} = this.props;
-
         return (
             <div>
                 <Button variant ="contained"
@@ -112,7 +104,6 @@ class ProductAdd extends Component {
                 onClick={this.handleClickOpen}
                 >상품 추가
                 </Button>
-                
                 
                 <Dialog open={this.state.open && this.props.isLogin} onClose={this.handleClickClose}>
                     <DialogTitle>상품을 추가하세요.</DialogTitle>

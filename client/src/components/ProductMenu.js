@@ -26,7 +26,7 @@ class ProductMenu extends Component {
         this.state = {
             id: '',
             password: '',
-            name: '',
+            //name: '',
             open: false, // dialog가 열려있는 지의 여부
         }
     }
@@ -65,7 +65,7 @@ class ProductMenu extends Component {
         this.sendProperty()
             .then((response) => {
                 console.log(response);
-                if(response.data.id === this.state.id){
+                  if(response.data.id === this.state.id){
                     this.setState({
                         name: response.data.name
                     })
@@ -93,6 +93,8 @@ class ProductMenu extends Component {
                     id: '',
                     password: ''
                 })
+
+        fetch('/logout');
     }
 
 
@@ -143,10 +145,10 @@ class ProductMenu extends Component {
                     </Dialog>
 
                     <Dialog open={this.state.open && this.props.isLogin} onClose={this.handleClickClose}>
-                        <DialogTitle>{this.state.name}님 반갑습니다.</DialogTitle>
+                        <DialogTitle>{this.props.name}님 반갑습니다.</DialogTitle>
                         <DialogContent>
                              <img src = "https:/placeimg.com/64/64/any"/><br/>
-                             <b>{this.state.name}</b> <b>, 25</b><br/>                       
+                             <b>{this.props.name}</b> <b>, 25</b><br/>                       
                         </DialogContent>
 
                         <DialogActions>

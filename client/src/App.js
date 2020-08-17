@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+// import { resolveInclude } from 'ejs';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import { Menu } from '@material-ui/core';
 
@@ -118,8 +119,25 @@ class App extends Component{
       completed: 0,
       searchKeyword: '',
       open: false,
-      isLogin: false
+      isLogin: false,
+      name:''
     }
+
+    this.isLoginApi()
+      .then (res => {
+        console.log(res.id);
+        if(res.id){
+          this.state.isLogin = true;
+          this.state.name = res.name;
+        }
+      })
+      .catch(err => console.log(err));
+  } 
+
+  isLoginApi = async() => {
+    const response = await fetch('/login');
+    const body = await response.json();
+    return body;
   }
 
   isLoginRefresh = (who) => {
@@ -155,11 +173,8 @@ class App extends Component{
   }
 
   callApi = async() => {
-    //const response = await fetch('/api/products');
     const response = await fetch('/api/main');
-    console.log(response);
     const body = await response.json();
-    console.log(body);
     return body;
   }
 
@@ -199,6 +214,7 @@ class App extends Component{
           <ProductMenu 
             isLogin= {this.state.isLogin}
             isLoginRefresh= {this.isLoginRefresh}
+            name = {this.state.name}
           />
           
           <Typography className={classes.title} variant="h6" href="http://localhost:3000">

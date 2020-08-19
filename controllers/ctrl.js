@@ -5,7 +5,6 @@ exports.get_login = (req, res) => {
     id: req.session.user_id,
     name: req.session.name
   }
-  console.log(key);
   res.send(key);
 };
 
@@ -13,7 +12,7 @@ exports.get_logout = (req, res) => {
   // 로그아웃 처리 - 세션 삭제 후 리다이렉트
   console.log("로그아웃을 시도합니다.");
   req.session.destroy() // 세션 삭제
-  res.clearCookie("sid")
+  res.clearCookie("sid") // 세션에 남은 쿠키 삭제, 부활 방지
   res.redirect('http://localhost:3000');
 }
 
@@ -75,7 +74,7 @@ exports.post_signup = (req, res) => {
 
   console.log("회원가입에 성공했습니다.");
 
-  res.redirect("/login");
+  res.redirect("http://localhost:3000");
 };
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ main */

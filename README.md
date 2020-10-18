@@ -3,10 +3,9 @@
 > 2020년 1학기 방학 개인토이프로젝트입니다.
 
 
-# client, server
-> React를 이용한 front-end, nodejs를 이용한 back_end 개발
+> React를 이용한 front-end (in client folder), nodejs를 이용한 back_end 개발
 
-Front-end using React, Back_end using nodejs
+Front-end using React (in client folder), Back_end using nodejs
 
 
 > 회원가입, 로그인, 관리자의 상품 관리 기능 추가

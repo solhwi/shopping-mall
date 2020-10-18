@@ -5,9 +5,17 @@
 
 > React를 이용한 front-end, nodejs를 이용한 back_end 개발
 
+Front-end using React, Back_end using nodejs
+
+
 > 회원가입, 로그인, 관리자의 상품 관리 기능 추가
 
+Add product management capabilities of membership, login, and administrator
+
+
 > heidiSQL을 이용한 고객 및 상품의 정보 관리
+
+Information management of customers and products using heidiSQL
 
 
 

@@ -27,4 +27,5 @@ Dev Period : 2020.07.15 ~ 2020.08.31
 
 
 Designer (1) : Heo Jun Hyeok
+
 Programmer (1) : Park Sol Hwi
